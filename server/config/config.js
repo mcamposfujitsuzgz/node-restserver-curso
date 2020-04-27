@@ -15,3 +15,10 @@ if (process.env.NODE_ENV === 'dev') {
 }
 
 process.env.URL_DB = urlDB;
+
+
+//vencimiento del token 30 DIAS
+process.env.CADUCIDAD_TOKEN = 60 * 60 * 24 * 30;
+
+//seed del token
+process.env.SEED_TOKEN = process.env.SEED_TOKEN || 'este-es-secret';

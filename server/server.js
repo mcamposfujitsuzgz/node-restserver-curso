@@ -2,10 +2,9 @@ require('./config/config');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-
 const express = require('express');
+
 const app = express();
-//const app = require('./routes/usuario').app;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -13,7 +12,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
-app.use(require('./routes/usuario'));
+// congiguracion global de rutas
+app.use(require('./routes/index'));
 
 // mongo db
 //"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
