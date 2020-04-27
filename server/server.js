@@ -1,10 +1,11 @@
 require('./config/config');
 
-const express = require('express');
 const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
+const express = require('express');
 const app = express();
-
+//const app = require('./routes/usuario').app;
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -12,43 +13,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(require('./routes/usuario'));
+
 // mongo db
 //"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
 
+//mongodb+srv://mcampos:lbTdWarFRyT4bn7G@cluster0-yqz1n.mongodb.net/cafe
+//mcampos
+//lbTdWarFRyT4bn7G
 
+mongoose.connect(process.env.URL_DB, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true
+}, err => {
+    if (err) throw err;
 
-app.get('/usuario', function(req, res) {
-    res.json('get usuario')
+    console.log("Base de datos Mongo");
 });
 
-app.post('/usuario', function(req, res) {
-    let body = req.body;
-
-    if (body.nombre === undefined) {
-        res.status(400).json({
-            ok: false,
-            mensaje: 'El nombre es necesario'
-        });
-    }
-
-    res.json({
-        persona: body
-    });
-});
-
-
-app.put('/usuario/:id', function(req, res) {
-    let id = req.params.id;
-
-    res.json({
-        id
-    })
-});
-
-
-app.delete('/usuario', function(req, res) {
-    res.json('delete usuario')
-});
 
 app.listen(process.env.PORT, () => {
     console.log('Escuchando puerto 3000');
