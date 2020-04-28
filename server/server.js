@@ -3,7 +3,7 @@ require('./config/config');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const express = require('express');
-
+const path = require('path');
 const app = express();
 
 // parse application/x-www-form-urlencoded
@@ -14,6 +14,9 @@ app.use(bodyParser.json());
 
 // congiguracion global de rutas
 app.use(require('./routes/index'));
+
+// habilitar capeta public
+app.use(express.static(path.resolve(__dirname, '../public')));
 
 // mongo db
 //"C:\Program Files\MongoDB\Server\4.2\bin\mongod.exe" --dbpath="c:\data\db"
