@@ -14,8 +14,8 @@ app.get('/usuario', verificaToken, (req, res) => {
     let limite = req.query.limite || 5;
     limite = Number(limite);
 
-    let conficion = { estado: true };
-    Usuario.find(conficion, 'nombre email role estado google')
+    let condicion = { estado: true };
+    Usuario.find(condicion, 'nombre email role estado google')
         .skip(desde)
         .limit(limite)
         .exec((err, usuarios) => {
@@ -26,7 +26,7 @@ app.get('/usuario', verificaToken, (req, res) => {
                 });
             }
 
-            Usuario.count(conficion, (err, cuantos) => {
+            Usuario.count(condicion, (err, cuantos) => {
                 res.json({
                     ok: true,
                     usuarios,
@@ -82,8 +82,6 @@ app.put('/usuario/:id', [verificaToken, verificaAdminRol], function(req, res) {
             usuario: usuarioDB
         });
     });
-
-
 });
 
 app.delete('/usuario/:id', verificaToken, function(req, res) {
@@ -115,7 +113,6 @@ app.delete('/usuario/:id', verificaToken, function(req, res) {
             usuario: usuarioBorrado
         });
     });
-
 });
 
 module.exports = app;

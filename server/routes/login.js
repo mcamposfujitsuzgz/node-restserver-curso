@@ -63,8 +63,6 @@ async function verify(token) {
         //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
     });
     const payload = ticket.getPayload();
-    //console.log(payload);
-    //const userid = payload['sub'];
 
     return {
         nombre: payload.name,
@@ -142,14 +140,6 @@ app.post('/google', async(req, res) => {
             });
         }
     })
-
-    /*
-
-    res.json({
-        ok: true,
-        usuario: googleUser
-    })
-    */
 });
 
 module.exports = app;
